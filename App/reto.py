@@ -105,10 +105,11 @@ def greater_average(element1,element2):
     return False
 
 
-def crear_ranking_peliculas(tipo_de_ordenamiento:str,cantidad_elementos:int,orden, lstMovies:list):
+def crear_ranking_peliculas(tipo_de_ordenamiento:str,cantidad_elementos:int,orden, lstMovies:list, casting:list):
     lista_peliculas = loadMovies()
     lista_resultado = lt.newList('SINGLE_LINKED',None)
-    
+    director=casting
+
     if tipo_de_ordenamiento == "vote_average":
         if orden == 'ascendente':
             sorting = sh.shellSort(lista_peliculas,greater_average)
@@ -118,13 +119,25 @@ def crear_ranking_peliculas(tipo_de_ordenamiento:str,cantidad_elementos:int,orde
         if orden == 'ascendente':
             sorting = sh.shellSort(lista_peliculas,greater_count)
         elif orden == 'descendente':
-            sorting = sh.shellSort(lista_peliculas,less_count)
+            sorting = sh.shellSort(lista_peliculas,less_count)            
+           
+    
     contador = 1
+    cont2=1
+    print (("Pelicula," +"\t"+ "Vote_average,"+"\t"+"vote_count"+"\n"+\
+        "------------------------------------------------------------"))
     while contador <= cantidad_elementos:
         lt.addFirst(lista_resultado,lt.getElement(lista_peliculas,contador))
+        iter_final= it.newIterator(lista_resultado)
+        while cont2<=cantidad_elementos and it.hasNext(iter_final):
+            u = it.next(iter_final)
+            vote_average_pelicula=u['vote_average']
+            vote_count=u['vote_count']
+            id_peli=u['id']        
+            print("P"+str(id_peli)+"\t"+"\t"+str(vote_average_pelicula)+"\t"+"\t"+"\t"+str(vote_count))
+            cont2+=1
         contador += 1 
-    
-    return lista_resultado
+    return ()
 
 
 def loadCasting():
@@ -292,7 +305,22 @@ def ranking_genero(genero: str, lstmovies:list, tipo_de_ordenamiento:str, cantid
         lt.addFirst(lista_resultado,lt.getElement(lista_genero,contador))
         contador += 1 
         
-    return lista_resultado
+    contador = 1
+    cont2=1
+    print (("Pelicula," +"\t"+"Genero"+"\t"+ "Vote_average,"+"\t"+"vote_count"+"\n"+\
+        "------------------------------------------------------------"))
+    while contador <= cantidad_elementos:
+        lt.addFirst(lista_resultado,lt.getElement(lista_genero,contador))
+        iter_final= it.newIterator(lista_resultado)
+        while cont2<=cantidad_elementos and it.hasNext(iter_final):
+            u = it.next(iter_final)
+            vote_average_pelicula=u['vote_average']
+            vote_count=u['vote_count']
+            id_peli=u['id']        
+            print("P"+str(id_peli)+"\t"+"\t"+str(genero)+"\t"+"\t"+str(vote_average_pelicula)+"\t"+"\t"+str(vote_count))
+            cont2+=1
+        contador += 1
+    return ()
 
 def main():
     """
@@ -316,7 +344,7 @@ def main():
                 ordenamiento = str(input("Ingrese el criterio de ordenamiento: " ))
                 elementos = int(input("Ingrese la cantidad de elementos que desea ver: " ))
                 tipo_orden = str(input("Ingrese el tipo de orden: 'ascendente o descendente': "))
-                resp=crear_ranking_peliculas(ordenamiento,elementos,tipo_orden, lstMovies)
+                resp=crear_ranking_peliculas(ordenamiento,elementos,tipo_orden, lstMovies, lstCasting)
                 print(resp)
                 pass
 
