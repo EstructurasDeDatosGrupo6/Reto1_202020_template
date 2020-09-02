@@ -100,7 +100,7 @@ def greater_count(element1, element2):
     return False
 
 def greater_average(element1,element2):
-    if float(element1['vote_average']) > float(element2['vote_average']):
+    if float(element1['vote_average']) > float(element1['vote_average']):
         return True 
     return False
 
@@ -280,7 +280,37 @@ def conocer_actor (actor:str, casting:list, details:list)->list:
 
     return ()
 
-def ranking_genero(genero: str, lstmovies:list, tipo_de_ordenamiento:str, cantidad_elementos:int, orden:str)-> list:
+
+def entender_genero(genero:str)->list:
+    movies=loadMovies()
+    lista_final=lt.newList('SINGLE_LINKED', None)
+    pelicula=lt.newList('SINGLE_LINKED', None)
+    votos=0
+        
+
+    t1_start = process_time()
+
+    while it.hasNext(iter_casting):
+    c = it.next(movies)
+    if genero in c["genres"] 
+        lt.addFirst(pelicula, c["original_title"])
+        lt.addLast(pelicula,c["genres"])
+        lt.addLast(pelicula,c["vote_count"])
+        votos+=c["vote_count"]
+        lt.addFirst(lista_final,pelicula)
+        
+    print (("pelicula," +"\t"+"genres,"+"\t"+ "Vote_count,"+"\n"+\
+        "------------------------------------------------------------"))
+    print(lista_final)
+    cpeli=lt.size(lista_final)
+    votos=votos/cpeli
+    print("Numero de Películas: "+str(cpeli)+"\n"+ \
+            "Promedio películas: "+str(votos)
+    
+
+    return()
+
+def ranking_genero(genero: str, lstmovies:list, tipo_de_ordenamiento:str, cantidad_elementos:int, orden:str):
     lista_genero = lt.newList('SINGLE_LINKED',None)
     iter_genero=it.newIterator(lstmovies)
     lista_resultado=lt.newList('SINGLE_LINKED', None)
@@ -300,11 +330,7 @@ def ranking_genero(genero: str, lstmovies:list, tipo_de_ordenamiento:str, cantid
             sorting = sh.shellSort(lista_genero,greater_count)
         elif orden == 'descendente':
             sorting = sh.shellSort(lista_genero,less_count)
-    contador = 1
-    while contador <= cantidad_elementos:
-        lt.addFirst(lista_resultado,lt.getElement(lista_genero,contador))
-        contador += 1 
-        
+
     contador = 1
     cont2=1
     print (("Pelicula," +"\t"+"Genero"+"\t"+ "Vote_average,"+"\t"+"vote_count"+"\n"+\
@@ -321,6 +347,7 @@ def ranking_genero(genero: str, lstmovies:list, tipo_de_ordenamiento:str, cantid
             cont2+=1
         contador += 1
     return ()
+
 
 def main():
     """
@@ -344,8 +371,9 @@ def main():
                 ordenamiento = str(input("Ingrese el criterio de ordenamiento: " ))
                 elementos = int(input("Ingrese la cantidad de elementos que desea ver: " ))
                 tipo_orden = str(input("Ingrese el tipo de orden: 'ascendente o descendente': "))
-                resp=crear_ranking_peliculas(ordenamiento,elementos,tipo_orden, lstMovies, lstCasting)
+                resp=crear_ranking_peliculas(ordenamiento,elementos,tipo_orden, lstMovies)
                 print(resp)
+
                 pass
 
             elif int(inputs[0])==3: #opcion 3
@@ -368,7 +396,9 @@ def main():
                 pass
 
             elif int(inputs[0])==5: #opcion 5
-                pass
+                genero=input("Ingrese el genero que desea verificar: ")
+                movies=loadMovies
+                entender_genero(movies,genero)                                                           )
 
             elif int(inputs[0])==6: #opcion 6
                 if lstMovies==None or lt.size(lstMovies)==0:
