@@ -108,7 +108,7 @@ def greater_average(element1,element2):
 def crear_ranking_peliculas(tipo_de_ordenamiento:str,cantidad_elementos:int,orden, lstMovies:list):
     lista_peliculas = loadMovies()
     lista_resultado = lt.newList('SINGLE_LINKED',None)
-    director=casting
+    
 
     if tipo_de_ordenamiento == "vote_average":
         if orden == 'ascendente':
