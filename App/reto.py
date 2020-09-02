@@ -105,7 +105,7 @@ def greater_average(element1,element2):
     return False
 
 
-def crear_ranking_peliculas(tipo_de_ordenamiento:str,cantidad_elementos:int,orden, lstMovies:list, casting:list):
+def crear_ranking_peliculas(tipo_de_ordenamiento:str,cantidad_elementos:int,orden, lstMovies:list):
     lista_peliculas = loadMovies()
     lista_resultado = lt.newList('SINGLE_LINKED',None)
     director=casting
